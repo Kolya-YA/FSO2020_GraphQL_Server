@@ -48,6 +48,7 @@ const typeDefs = gql`
     bookCount: Int!
     authorCount: Int!
     allBooks(author: String, genre: String): [Book]!
+    allGenres: [String]!
     allAuthors: [Author!]!
     me: User
   }
@@ -84,6 +85,8 @@ const resolvers = {
       if (args.genre) return Book.find({})
       return Book.find({})   
     },
+
+    allGenres: () => Book.collection.distinct('genres'),
 
     allAuthors: () => Author.find({}),
 
@@ -157,7 +160,7 @@ const resolvers = {
     },
 
     login: async (parent, args) => {
-      const user = await User.findOne({ username: args.username })
+      const user = await User.findOne({ username: args.username })      
       if (!user || args.password !== 'secret') {
         throw new UserInputError('Wrong credentials')
       }
