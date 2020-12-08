@@ -83,7 +83,7 @@ const resolvers = {
 
     allBooks: (parent, args) => {
       if (args.author) return Book.find({})
-      if (args.genre) return Book.find({})
+      if (args.genre) return Book.find({ genres: args.genre })
       return Book.find({})   
     },
 
@@ -170,7 +170,7 @@ const resolvers = {
         username: user.username,
         id: user._id
       }
-      
+
       return {
         value: jwt.sign(userForToken, process.env.JWT_SECRET),
         user
