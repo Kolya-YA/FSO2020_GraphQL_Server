@@ -43,6 +43,7 @@ const typeDefs = gql`
   }
   type Token {
     value: String!
+    user: User!
   }
   type Query {
     bookCount: Int!
@@ -169,8 +170,11 @@ const resolvers = {
         username: user.username,
         id: user._id
       }
-
-      return { value: jwt.sign(userForToken, process.env.JWT_SECRET) }
+      
+      return {
+        value: jwt.sign(userForToken, process.env.JWT_SECRET),
+        user
+      }
     }
   }
 }
