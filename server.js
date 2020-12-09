@@ -1,4 +1,4 @@
-8.23: Subscriptions - serverconst { ApolloServer, UserInputError, AuthenticationError } = require('apollo-server')
+const { ApolloServer, UserInputError, AuthenticationError } = require('apollo-server')
 const mongoose = require('mongoose')
 
 const typeDefs = require('./gql/schema')
@@ -28,6 +28,6 @@ const server = new ApolloServer({
 
 server.listen()
   .then(({ url, subscriptionsUrl }) => {
-    console.log(`Server ready at ${url}`)
-    console.log(`Subscriptions ready at ${subscriptionsUrl}`)
+    console.log(`\x1b[38;5;159;48;5;236m  Server ready at ${url}\x1b[0m`)
+    console.log(`\x1b[38;5;159;48;5;236m  Subscriptions ready at ${subscriptionsUrl}\x1b[0m`)
 })

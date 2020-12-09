@@ -33,7 +33,8 @@ module.exports = {
       const author = await Author.findById(root.author)
       return {
         name: author.name,
-        born: author.born
+        born: author.born,
+        id: author.id
       }
     }
   },
