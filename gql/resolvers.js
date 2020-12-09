@@ -23,7 +23,11 @@ module.exports = {
 
     allGenres: () => Book.collection.distinct('genres'),
 
-    allAuthors: () => Author.find({}),
+    allAuthors: async () => {
+      const authors = await Author.find({}).populate('booksCount')
+      console.log(authors)
+      return authors
+    },
 
     me: (parent, args, context) => context.currentUser
   },
@@ -37,10 +41,6 @@ module.exports = {
         id: author.id
       }
     }
-  },
-
-  Author: {
-    booksCount: root => Book.collection.countDocuments({ author: root._id})
   },
 
   Mutation: {
